@@ -31,6 +31,44 @@ CREATE TABLE `beekeepers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `hives`
+--
+
+DROP TABLE IF EXISTS `hives`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hives` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `beekeeper_id` int NOT NULL,
+  `location_id` int NOT NULL,
+  `hive_type` varchar(50) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `beekeeper_id` (`beekeeper_id`),
+  KEY `location_id` (`location_id`),
+  CONSTRAINT `fk_hives_beekeeper` FOREIGN KEY (`beekeeper_id`) REFERENCES `beekeepers` (`id`),
+  CONSTRAINT `fk_hives_location` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `locations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `climate_zone` varchar(50) NOT NULL,
+  `flora_type` varchar(100) NOT NULL,
+  `avg_temp_c` decimal(4,1) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `locations_chk_1` CHECK ((`avg_temp_c` between -(60) and 60))
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -41,4 +79,4 @@ CREATE TABLE `beekeepers` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-02  4:26:36
+-- Dump completed on 2025-10-02  5:45:21
