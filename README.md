@@ -23,16 +23,22 @@ docker exec -i bees-mysql mysql -ubeekeeper -pmysql bees_db < seed.sql
 ## Connect (DataGrip / TablePlus)
 
 Host: localhost
+
 Port: 3307
+
 DB: bees_db
+
 User: beekeeper
+
 Pass: mysql
 
 ## Files
 schema.sql
  – tables/constraints
+
 seed.sql
  – demo rows
+ 
 docker-compose.yml
  – MySQL 8 (container bees-mysql)
 
